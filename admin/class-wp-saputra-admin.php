@@ -20,6 +20,8 @@
  * @subpackage Wp_Saputra/admin
  * @author     saputra <saputraridh@gmail.com>
  */
+use Carbon_Fields\Container;
+use Carbon_Fields\Field;
 class Wp_Saputra_Admin {
 
 	/**
@@ -39,6 +41,7 @@ class Wp_Saputra_Admin {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
+	private $functions;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -47,10 +50,11 @@ class Wp_Saputra_Admin {
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( $plugin_name, $version, $functions ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->functions = $functions;
 
 	}
 
@@ -98,6 +102,19 @@ class Wp_Saputra_Admin {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-saputra-admin.js', array( 'jquery' ), $this->version, false );
 
+	}
+	function crb_attach_wp_saputra_options() {
+		$basic_options_container = Container::make( 'theme_options', __( 'Wp Saputra Options' ) )
+			->set_page_menu_position( 4 )
+			->add_fields( array(
+				Field::make( 'text', 'crb_wp_saputra_key_public', 'reCAPTCHA key public' )
+				->set_help_text('Bisa dilihat di <a href="https://www.google.com/recaptcha/admin/" target="_blank">https://www.google.com/recaptcha/admin/</a>.'),
+				Field::make( 'text', 'crb_wp_saputra_key_private', 'reCAPTCHA key private' )
+				->set_help_text('Bisa dilihat di <a href="https://www.google.com/recaptcha/admin/" target="_blank">https://www.google.com/recaptcha/admin/</a>.'),
+				Field::make( 'text', 'crb_apikey_saputra', 'API KEY' )
+				->set_default_value($this->functions->generateRandomString())
+				->set_help_text('Wajib diisi. API KEY digunakan untuk integrasi data.')
+			) );
 	}
 
 }
