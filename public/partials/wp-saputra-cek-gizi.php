@@ -1,15 +1,24 @@
 <h1 class="text-center">Cek Data Gizi</h1>
 <form style="width: 500px; margin: auto;" class="text-center">
-    <div class="form-group">
-        <div class="g-recaptcha" data-sitekey="<?php echo get_option('_crb_wp_saputra_key_public'); ?>" style="margin: 10px auto; width: 300px;"></div>
-    </div>
-    <div class="form-group">
-        <label for="nik">Masukan NIK</label>
-        <div class="input-group">
-            <input type="number" class="form-control" id="nik" placeholder="xxxxxxxxxxx">
-            <div class="input-group-append">
-                <span class="btn btn-primary" type="button" id="cari" style="display: flex; align-items: center;">Cari Data</span>
-            </div>
+    <div class="form-group text-center">
+        <label for="">Masukan Data</label>
+        <div class="mb-2">
+            <label class="form-label">Nama</label>
+            <input type="text" class="form-control" name="nama">
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Berat Badan</label>
+            <input type="number" class="form-control" name="beratbadan">
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Tinggi Badan</label>
+            <input type="number" class="form-control" name="nama">
+        </div>
+        <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="<?php echo get_option('_crb_wp_saputra_key_public'); ?>" style="margin: 10px auto; width: 300px;"></div>
+        </div>
+        <div class="modal-footer text-center">
+            <button class="btn btn-primary">Simpan</button>
         </div>
     </div>
 </form>
